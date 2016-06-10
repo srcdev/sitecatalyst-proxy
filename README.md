@@ -10,7 +10,7 @@ Single page apps often load what to the user appears to be a new page, the follo
 Simulated page load tracking uses customer link variables `s.t(customLinkVars)` which leave the initially set page properties, also prevents unwanted properties being transmitted.
 
 ````javascript
-siteCatalyst.push({
+SiteCatalyst.push({
   type:           'load',
   pageName:       'Page name value', 
   pageType:       'errorPage',
@@ -40,7 +40,7 @@ Track an action on a page where there is no hyperlink to follow, for example, op
 * `'d'` > Download
 
 ````javascript
-siteCatalyst.push({
+SiteCatalyst.push({
   type:           'click',
   clickAction:    'action',
   linkType:       'd',
@@ -72,7 +72,7 @@ Track an action on a page where there is no hyperlink to follow, for example, op
 * `'d'` > Download
 
 ````javascript
-siteCatalyst.push({
+SiteCatalyst.push({
   type:           'click',
   clickAction:    'link',
   linkType:       'o',

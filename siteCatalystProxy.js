@@ -8,15 +8,16 @@ var siteCatalyst = {
 
     if (s) {
 
-      var linkTrackVars = [];
-      var customLinkVars = [];
-      var trackingType;
-      var linkName;
-      var clickAction;
-      var linkType;
-      var property;
+      var linkTrackVars = [],
+          customLinkVars = [],
+          trackingType,
+          linkName,
+          clickAction,
+          linkType,
+          property,
+          index;
 
-      for (var index in array) {
+      for (index in array) {
         if (array.hasOwnProperty(index)) {
           property = index;
           var value = array[index];
@@ -87,8 +88,10 @@ var siteCatalyst = {
   },
 
   cleanValues:function(array){
-    var property;
-    for (var index in array) {
+    var property,
+        index;
+
+    for (index in array) {
       if (array.hasOwnProperty(index)) {
         property = index;
         delete s[property];

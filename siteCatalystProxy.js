@@ -4,8 +4,6 @@
 
 var siteCatalyst = {
 
-  taggingDefaults: null,
-
   push:function(array){
 
     if (s) {

@@ -1,4 +1,4 @@
-# sitecatalyst-proxy
+# Adobe Site Catalyst proxy
 Proxy function for single page application to send tracking data to Adobe Site Catalyst
 
 ## Track a simulated page load s.t()

@@ -78,11 +78,6 @@ var siteCatalyst = {
       linkType = null;
       siteCatalyst.cleanValues(array);
 
-/****************************************************
-* Reinstate properties set on page load
-**/
-      siteCatalyst.restoreInitialValues();
-
     } else {
       console.log('Adobe Site Catalyst not present');
     }
@@ -95,47 +90,5 @@ var siteCatalyst = {
         delete s[property];
       }
     }
-  },
-
-  saveInitialValues:function(){
-    var taggingDefaults;
-
-    if (typeof s === 'undefined') return;
-
-    // Save a copy of all properties in omniture 's' object
-    if (siteCatalyst.taggingDefaults === null) {
-      siteCatalyst.taggingDefaults = taggingDefaults = {};
-      for (prop in s) {
-        if (!s.hasOwnProperty(prop)) continue;
-        if (typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
-          taggingDefaults[prop] = s[prop];
-        }
-      }
-    }
-  },
-
-  restoreInitialValues:function(){
-    var taggingDefaults = siteCatalyst.taggingDefaults;
-
-    if (typeof s === 'undefined') return;
-    if (taggingDefaults === null) return;
-
-    // Run through omniture 's' object properties replacing with those in our copy made earlier
-    for (prop in s) {
-      if (!s.hasOwnProperty(prop)) continue;
-
-      if (typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
-        if (typeof taggingDefaults[prop] !== 'undefined') {
-          s[prop] = taggingDefaults[prop];
-        } else {
-          delete s[prop];
-        }
-      }
-    }
   }
 }
-
-/****************************************************
-*   ON DOM Ready
-**/
-siteCatalyst.saveInitialValues();

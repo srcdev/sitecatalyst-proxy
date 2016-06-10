@@ -13,7 +13,7 @@ var siteCatalyst = {
       var linkTrackVars = [];
       var customLinkVars = [];
 
-      for (var index in array) {
+      for (index in array) {
         if (array.hasOwnProperty(index)) {
           var property = index;
           var value = array[index];
@@ -42,7 +42,7 @@ var siteCatalyst = {
               linkTrackVars.push(property);
               break;
           }
-        } 
+        }
       }
 
 /****************************************************
@@ -71,14 +71,13 @@ var siteCatalyst = {
 /****************************************************
 * Clear down properties we've just set
 **/
-/*
       linkTrackVars = null;
       trackingType = null;
       linkName = null;
       clickAction = null;
       linkType = null;
       siteCatalyst.cleanValues(array);
-*/
+
 /****************************************************
 * Reinstate properties set on page load
 **/
@@ -90,11 +89,11 @@ var siteCatalyst = {
   },
 
   cleanValues:function(array){
-    for (var index in array) {
+    for (index in array) {
       if (array.hasOwnProperty(index)) {
         property = index;
-        s[property] = null;
-      } 
+        delete s[property];
+      }
     }
   },
 
@@ -104,11 +103,11 @@ var siteCatalyst = {
     if (typeof s === 'undefined') return;
 
     // Save a copy of all properties in omniture 's' object
-    if(siteCatalyst.taggingDefaults === null) {
+    if (siteCatalyst.taggingDefaults === null) {
       siteCatalyst.taggingDefaults = taggingDefaults = {};
-      for(var prop in s) {
-        if(!s.hasOwnProperty(prop)) continue;
-        if(typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
+      for (prop in s) {
+        if (!s.hasOwnProperty(prop)) continue;
+        if (typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
           taggingDefaults[prop] = s[prop];
         }
       }
@@ -121,14 +120,12 @@ var siteCatalyst = {
     if (typeof s === 'undefined') return;
     if (taggingDefaults === null) return;
 
-    console.log('Resetting defaults');
-
     // Run through omniture 's' object properties replacing with those in our copy made earlier
-    for (var prop in s) {
+    for (prop in s) {
       if (!s.hasOwnProperty(prop)) continue;
 
-      if(typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
-        if(typeof taggingDefaults[prop] !== 'undefined') {
+      if (typeof s[prop] !== 'object' && typeof s[prop] !== 'function') {
+        if (typeof taggingDefaults[prop] !== 'undefined') {
           s[prop] = taggingDefaults[prop];
         } else {
           delete s[prop];

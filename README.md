@@ -3,11 +3,11 @@ Proxy function for single page application to send tracking data to Adobe Site C
 
 Assumes `s_code` has already been loaded and initialised on the page.  
 
-The page load tracking uses customer link variables `s.t(customLinkVars)` which leave the initially set page properties, also prevents unwanted properties being transmitted.
-
 ##Track a simulated page load `s.t()`
 
 Single page apps often load what to the user appears to be a new page, the following will track this as a page load **incrementing the page view counter**.
+
+Simulated page load tracking uses customer link variables `s.t(customLinkVars)` which leave the initially set page properties, also prevents unwanted properties being transmitted.
 
 ````javascript
 siteCatalyst.push({

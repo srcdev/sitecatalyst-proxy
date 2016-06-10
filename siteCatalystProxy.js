@@ -10,28 +10,33 @@ var siteCatalyst = {
 
       var linkTrackVars = [];
       var customLinkVars = [];
+      var trackingType;
+      var linkName;
+      var clickAction;
+      var linkType;
+      var property;
 
-      for (index in array) {
+      for (var index in array) {
         if (array.hasOwnProperty(index)) {
-          var property = index;
+          property = index;
           var value = array[index];
 
           switch (property) {
 
             case "type":
-              var trackingType = value;
+              trackingType = value;
               break;
 
             case "linkName":
-              var linkName = value;
+              linkName = value;
               break;
 
             case "clickAction":
-              var clickAction = value;
+              clickAction = value;
               break;
 
             case "linkType":
-              var linkType = value;
+              linkType = value;
               break;
 
             default:
@@ -82,11 +87,12 @@ var siteCatalyst = {
   },
 
   cleanValues:function(array){
-    for (index in array) {
+    var property;
+    for (var index in array) {
       if (array.hasOwnProperty(index)) {
         property = index;
         delete s[property];
       }
     }
   }
-}
+};

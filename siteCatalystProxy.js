@@ -3,7 +3,7 @@
 **/
 
 var SiteCatalyst = (function () {  
-  
+
   var cleanValues = function(array){
     var property,
         index;
@@ -16,8 +16,60 @@ var SiteCatalyst = (function () {
     }
   };
 
+/****************************************************
+* Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
+**/
+  var saveInitialValues = function(){
+    var taggingDefaults;
+
+    if (typeof s === 'undefined') return;
+
+    if (SiteCatalyst.taggingDefaults === null) {
+      SiteCatalyst.taggingDefaults = taggingDefaults = {};
+      
+      var property;
+      for (property in s) {
+
+        if (!s.hasOwnProperty(property)) continue;
+        if (typeof s[property] !== 'undefined' && typeof s[property] !== 'object' && typeof s[property] !== 'function') {
+          taggingDefaults[property] = s[property];
+        }
+
+      }
+    }
+  };
+
+/****************************************************
+* Restore previously saved Sitecatalyst properties.
+**/
+  var restoreInitialValues = function(){
+    var taggingDefaults = SiteCatalyst.taggingDefaults;
+
+    if (typeof s === 'undefined') return;
+    if (taggingDefaults === null) return;
+
+    var property;
+    for (property in s) {
+      if (!s.hasOwnProperty(property)) continue;
+
+      if (typeof s[property] !== 'object' && typeof s[property] !== 'function') {
+
+        if (typeof taggingDefaults[property] !== 'undefined') {
+          s[property] = taggingDefaults[property];
+        } else {
+          delete s[property];
+        }
+
+      }
+    }
+  };
+
   return {
+    taggingDefaults: null,
+
     push:function(array){
+
+      saveInitialValues();
 
       if (s) {
 
@@ -62,9 +114,9 @@ var SiteCatalyst = (function () {
           }
         }
 
-  /****************************************************
-  * Create the s_code call and send analytics
-  **/
+/****************************************************
+* Create the s_code call and send analytics
+**/
         s.linkTrackEvents = s.events;
         s.linkTrackVars = linkTrackVars.join(',');
 
@@ -85,15 +137,17 @@ var SiteCatalyst = (function () {
           }
         }
 
-  /****************************************************
-  * Clear down properties we've just set
-  **/
+/****************************************************
+* Clear down properties we've just set
+**/
         linkTrackVars = null;
         trackingType = null;
         linkName = null;
         clickAction = null;
         linkType = null;
         cleanValues(array);
+
+        restoreInitialValues();
 
       } else {
         console.log('Adobe Site Catalyst not present');

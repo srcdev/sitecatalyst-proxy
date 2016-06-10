@@ -3,7 +3,7 @@ Proxy function for single page application to send tracking data to Adobe Site C
 
 Assumes `s_code` has already been loaded and initialised on the page.  
 
-##Track a simulated page load `s.t()`
+##Simulate page load tracking `s.t()`
 
 Single page apps often load what to the user appears to be a new page, the following will track this as a page load **incrementing the page view counter**.
 

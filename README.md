@@ -1,5 +1,7 @@
 #Adobe Site Catalyst proxy
-Proxy function for single page application to send tracking data to Adobe Site Catalyst
+Proxy function for single page application to send tracking data to Adobe Site Catalyst.  
+
+Assumes `s_code` has already been loaded and initialised on the page.  
 
 The page load tracking uses customer link variables `s.t(customLinkVars)` which leave the initially set page properties, also prevents unwanted properties being transmitted.
 

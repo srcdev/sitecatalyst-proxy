@@ -2,41 +2,6 @@
 * Function pass data through to s_code for reporting
 **/
 
-siteCatalyst.push({
-  type:           'click',      //  'click' - Non page load action, don't increment page counter
-  clickAction:    'action',       //  ''/'link'/'action' - Empty value if type = load / Follow or link / Trigger an action, eg, display an overlay, close an option
-  linkType:       'o',          //  ''/o'/'e'/'d' - Only used with 'type:click'. Omniture's Custom Link property ('o'ther, 'd'ownload, 'e'xit)
-  linkName:       'Your friendly link name', 
-  pageName:       'Page name value', 
-  pageType:       'errorPage',  // Omit this for a standard page
-  campaign:       'Your campaign ID', // (eVar0) can be set via site catalyst internal function - s.getQueryParam('cid') 
-  channel:        'Channel | Goes | Here', 
-  eVar31:         'eVar31 Value',
-  eVar55:         'eVar55 Value',
-  events:         'event2,event3',
-  hier1:          'Hier string 1 | Hier string 2 | Hier string 3', // hier1/2/3/4/5 - Ensure you pay attention to how these are created to prevent errors in reports
-  prop1:          'prop1 value',
-  prop12:         'prop12 value',
-  products:       'Product values go here',
-  server:         'UK Site' 
-});
-
-siteCatalyst.push({
-  type:           'load',       //  'load' increment page visit counter
-  pageName:       'Page name value', 
-  pageType:       'errorPage',  // Omit this for a standard page
-  campaign:       'Your campaign ID', // (eVar0) can be set via site catalyst internal function - s.getQueryParam('cid') 
-  channel:        'Channel | Goes | Here', 
-  eVar31:         'eVar31 Value',
-  eVar55:         'eVar55 Value',
-  events:         'event2,event3',
-  hier1:          'Hier string 1 | Hier string 2 | Hier string 3', // hier1/2/3/4/5 - Ensure you pay attention to how these are created to prevent errors in reports
-  prop1:          'prop1 value',
-  prop12:         'prop12 value',
-  products:       'Product values go here',
-  server:         'UK Site' 
-});
-
 var siteCatalyst = {
 
   taggingDefaults: null,
@@ -46,6 +11,7 @@ var siteCatalyst = {
     if (s) {
 
       var linkTrackVars = [];
+      var customLinkVars = [];
 
       for (var index in array) {
         if (array.hasOwnProperty(index)) {
@@ -72,6 +38,7 @@ var siteCatalyst = {
 
             default:
               s[property] = value;
+              customLinkVars[property] = value;
               linkTrackVars.push(property);
               break;
           }
@@ -83,20 +50,12 @@ var siteCatalyst = {
 **/
       s.linkTrackEvents = s.events;
       s.linkTrackVars = linkTrackVars.join(',');
-//      s = s_gi(s_account);  // Set Omniture account
 
       if (trackingType === 'load') {
 
-        console.log('Sending "LOAD"');
-
-//        s.t();
-        s = s_gi(s_account);  // Set Omniture account
-        var s_code = s.t();
-        if (s_code) document.write(s_code);
+        s.t(customLinkVars);
 
       } else {
-
-        console.log('Sending "CLICK"');
 
         switch (clickAction) {
           case 'action':
@@ -112,13 +71,14 @@ var siteCatalyst = {
 /****************************************************
 * Clear down properties we've just set
 **/
+/*
       linkTrackVars = null;
       trackingType = null;
       linkName = null;
       clickAction = null;
       linkType = null;
       siteCatalyst.cleanValues(array);
-
+*/
 /****************************************************
 * Reinstate properties set on page load
 **/

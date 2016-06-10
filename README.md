@@ -43,10 +43,9 @@ Track an action on a page where there is no hyperlink to follow, for example, op
 siteCatalyst.push({
   type:           'click',
   clickAction:    'action',
-  linkType:       'o',
-  linkName:       'Your friendly link name', 
+  linkType:       'd',
+  linkName:       'Download PDF', 
   pageName:       'Page name value', 
-  pageType:       'errorPage',
   campaign:       'Your campaign ID',
   channel:        'Channel | Goes | Here', 
   eVar31:         'eVar31 Value',

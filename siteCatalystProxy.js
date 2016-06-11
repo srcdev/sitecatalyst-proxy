@@ -4,18 +4,6 @@
 
 var SiteCatalyst = (function () {  
 
-  var cleanValues = function(array){
-    var property,
-        index;
-
-    for (index in array) {
-      if (array.hasOwnProperty(index)) {
-        property = index;
-        delete s[property];
-      }
-    }
-  };
-
 /****************************************************
 * Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
 **/
@@ -64,16 +52,30 @@ var SiteCatalyst = (function () {
     }
   };
 
+/****************************************************
+* Clear down properties created for s.tl()
+**/
+  var cleanValues = function(array){
+    var property,
+        index;
+
+    for (index in array) {
+      if (array.hasOwnProperty(index)) {
+        property = index;
+        delete s[property];
+      }
+    }
+  };
+
   return {
     taggingDefaults: null,
 
     push:function(array){
 
-      saveInitialValues();
-
       if (s) {
 
-        var linkTrackVars = [],
+        var useInitialPropertyReset = true,
+            linkTrackVars = [],
             customLinkVars = [],
             trackingType,
             linkName,
@@ -81,6 +83,8 @@ var SiteCatalyst = (function () {
             linkType,
             property,
             index;
+
+        if (useInitialPropertyReset) saveInitialValues(); 
 
         for (index in array) {
           if (array.hasOwnProperty(index)) {
@@ -147,7 +151,7 @@ var SiteCatalyst = (function () {
         linkType = null;
         cleanValues(array);
 
-        restoreInitialValues();
+        if (useInitialPropertyReset) restoreInitialValues();
 
       } else {
         console.log('Adobe Site Catalyst not present');

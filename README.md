@@ -3,6 +3,12 @@ Proxy function for single page application to send tracking data to Adobe Site C
 
 Assumes `s_code` has already been loaded and initialised on the page.  
 
+##Useage
+
+This interface will accept all internal Sitecatalyst properties and variables (props/eVars/event/etc)
+
+If you're wanting to track a click `type:'click'` then `clickAction:'[action/lick]'` and `linkType:'[o/d/e]',` must also be passed. Page load events do not require these to be passed and will be ignored if set.  
+  
 ##Simulate page load tracking `s.t()`
 
 Single page apps often load what to the user appears to be a new page, the following will track this as a page load **incrementing the page view counter**.

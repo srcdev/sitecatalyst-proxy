@@ -1,5 +1,5 @@
 /****************************************************
-* Function pass data through to s_code for reporting
+* Interface to pass data through to s_code for reporting
 **/
 
 var SiteCatalyst = (function () {  

@@ -33,9 +33,9 @@ SiteCatalyst.push({
 });
 ````
 
-##Track an action click `s.tl()`
+##Track an event `s.tl()`
 
-Track an action on a page where there is no hyperlink to follow, for example, opening a panel or forward/next buttons.
+Track an action on a page where there is no hyperlink to follow, for example, opening/displaying a panel, download or forward/next buttons.
 
 ###Options
 
@@ -47,7 +47,7 @@ Track an action on a page where there is no hyperlink to follow, for example, op
 
 ````javascript
 SiteCatalyst.push({
-  type:           'click',
+  type:           'event',
   clickAction:    'action',
   linkType:       'd',
   linkName:       'Download PDF', 
@@ -65,9 +65,9 @@ SiteCatalyst.push({
 });
 
 ````
-##Track a link click `s.tl()`
+##Track a  click `s.tl()`
 
-Track an action on a page where there is no hyperlink to follow, for example, opening a panel or forward/next buttons.
+Track a link click.
 
 ###Options
 
@@ -79,7 +79,7 @@ Track an action on a page where there is no hyperlink to follow, for example, op
 
 ````javascript
 SiteCatalyst.push({
-  type:           'click',
+  type:           'event',
   clickAction:    'link',
   linkType:       'o',
   linkName:       'Your friendly link name', 

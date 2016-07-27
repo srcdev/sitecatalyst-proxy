@@ -37,6 +37,8 @@ SiteCatalyst.push({
 
 Track an action on a page where there is no hyperlink to follow, for example, opening/displaying a panel, download or forward/next buttons.
 
+Tracking an action also overrides the default 500ms timeout as no navigation is instantiated.
+
 ###Options
 
 `linkType:'o',` 

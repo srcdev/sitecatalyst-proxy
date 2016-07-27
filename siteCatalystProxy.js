@@ -132,11 +132,11 @@ var SiteCatalyst = (function () {
 
           switch (clickAction) {
             case 'action':
-              s.tl(this,linkType,linkName,null,null);
+              s.tl(true,linkType,linkName,null,null);
               break;
             
             case 'link':
-              s.tl(true,linkType,linkName,null,null);
+              s.tl(this,linkType,linkName,null,null);
               break;
           }
         }

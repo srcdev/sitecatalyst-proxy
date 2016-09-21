@@ -7,7 +7,7 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
 **/
-  var saveInitialValues = function(){
+  function saveInitialValues(){
     var taggingDefaults;
 
     if (typeof s === 'undefined') return;
@@ -30,7 +30,7 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Restore previously saved Sitecatalyst properties.
 **/
-  var restoreInitialValues = function(){
+  function restoreInitialValues(){
     var taggingDefaults = SiteCatalyst.taggingDefaults;
 
     if (typeof s === 'undefined') return;
@@ -55,9 +55,9 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Clear down properties created for s.tl()
 **/
-  var cleanValues = function(array){
-    var property,
-        index;
+  function cleanValues(array){
+    var property;
+    var index;
 
     for (index in array) {
       if (array.hasOwnProperty(index)) {

@@ -15,6 +15,8 @@ Single page apps often load what to the user appears to be a new page, the follo
 
 Simulated page load tracking uses customer link variables `s.t(customLinkVars)` which leave the initially set page properties, also prevents unwanted properties being transmitted.
 
+###NOTE: Omnibug for Chrome still seems to exhibit a bug previously where it will display a s.t() triggered after page load as a click. You can verify the tracking request as a page load event by inpsecting the querystring in the 'Network' tab. 'pev_2' is the variable that send the s.tl() type, this if missing, results in a page view/load.
+
 ````javascript
 SiteCatalyst.push({
   type:           'load',

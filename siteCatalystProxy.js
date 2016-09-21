@@ -130,6 +130,10 @@ var SiteCatalyst = (function () {
 
         } else {
 
+          if (typeof linkName === 'undefined') {
+            linkName = 'Non page load event [s.tl()]';
+          }
+
           switch (clickAction) {
             case 'action':
               s.tl(true,linkType,linkName,null,null);

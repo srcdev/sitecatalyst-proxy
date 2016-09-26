@@ -2,27 +2,32 @@
 * Interface to pass data through to s_code for reporting
 **/
 
-var SiteCatalyst = (function () {  
+var SiteCatalyst = (function() {
 
 /****************************************************
 * Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
 **/
-  function saveInitialValues(){
-    var taggingDefaults;
-
-    if (typeof s === 'undefined') return;
+  function saveInitialValues() {
 
     if (SiteCatalyst.taggingDefaults === null) {
-      SiteCatalyst.taggingDefaults = taggingDefaults = {};
-      
-      var property;
-      for (property in s) {
 
-        if (!s.hasOwnProperty(property)) continue;
-        if (typeof s[property] !== 'undefined' && typeof s[property] !== 'object' && typeof s[property] !== 'function') {
-          taggingDefaults[property] = s[property];
+      var taggingDefaults;
+      
+      SiteCatalyst.taggingDefaults = taggingDefaults = {};      
+
+      for (var property in s) {
+
+        if (!s.hasOwnProperty(property)) {
+          continue;
         }
 
+        if (typeof s[property] !== 'undefined' &&
+            typeof s[property] !== 'object' &&
+            typeof s[property] !== 'function') {
+
+          taggingDefaults[property] = s[property];
+
+        }
       }
     }
   };
@@ -30,19 +35,22 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Restore previously saved Sitecatalyst properties.
 **/
-  function restoreInitialValues(){
+  function restoreInitialValues() {
+
     var taggingDefaults = SiteCatalyst.taggingDefaults;
 
-    if (typeof s === 'undefined') return;
-    if (taggingDefaults === null) return;
+    if (taggingDefaults === null) {
+      return;
+    }
 
-    var property;
+    for (var property in s) {
 
-    for (property in s) {
+      if (!s.hasOwnProperty(property)) {
+        continue;
+      }
 
-      if (!s.hasOwnProperty(property)) continue;
-
-      if (typeof s[property] !== 'object' && typeof s[property] !== 'function') {
+      if (typeof s[property] !== 'object' &&
+          typeof s[property] !== 'function') {
 
         if (typeof taggingDefaults[property] !== 'undefined') {
           s[property] = taggingDefaults[property];
@@ -57,11 +65,10 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Clear down properties created for s.tl()
 **/
-  function cleanValues(options){
+  function cleanValues(options) {
     var property;
-    var i;
 
-    for (i in options) {
+    for (var i in options) {
       if (options.hasOwnProperty(i)) {
         property = i;
         delete s[property];
@@ -69,106 +76,103 @@ var SiteCatalyst = (function () {
     }
   };
 
-  return {
+  function push(options) {
 
-    taggingDefaults: null,
+    if ( typeof s !== 'undefined' ) {
 
-    push: function(options) {
+      var linkTrackVars = [],
+          customLinkVars = [],
+          trackingType,
+          linkName,
+          clickAction,
+          linkType,
+          property;
 
-      if ( typeof s !== 'undefined' ) {
+      saveInitialValues();
 
-        var useInitialPropertyReset = true,
-            linkTrackVars = [],
-            customLinkVars = [],
-            trackingType,
-            linkName,
-            clickAction,
-            linkType,
-            property,
-            i;
+      for (var i in options) {
 
-        if (useInitialPropertyReset) saveInitialValues(); 
+        if (options.hasOwnProperty(i)) {
 
-        for (i in options) {
+          property = i;
+          var value = options[i];
 
-          if (options.hasOwnProperty(i)) {
+          switch (property) {
 
-            property = i;
-            var value = options[i];
+            case "type":
+              trackingType = value;
+              break;
 
-            switch (property) {
+            case "linkName":
+              linkName = value;
+              break;
 
-              case "type":
-                trackingType = value;
-                break;
+            case "clickAction":
+              clickAction = value;
+              break;
 
-              case "linkName":
-                linkName = value;
-                break;
+            case "linkType":
+              linkType = value;
+              break;
 
-              case "clickAction":
-                clickAction = value;
-                break;
-
-              case "linkType":
-                linkType = value;
-                break;
-
-              default:
-                s[property] = value;
-                customLinkVars[property] = value;
-                linkTrackVars.push(property);
-                break;
-            }
+            default:
+              s[property] = value;
+              customLinkVars[property] = value;
+              linkTrackVars.push(property);
+              break;
           }
         }
+      }
 
 /****************************************************
 * Create the s_code call and send analytics
 **/
-        s.linkTrackEvents = s.events;
-        s.linkTrackVars   = linkTrackVars.join(',');
+      s.linkTrackEvents = s.events;
+      s.linkTrackVars   = linkTrackVars.join(',');
 
-        if (trackingType === 'load') {
+      if (trackingType === 'load') {
 
-          s.t(customLinkVars);
+        s.t(customLinkVars);
 
-        } else {
+      } else {
 
-          if (typeof linkName === 'undefined') {
-            linkName = 'Non page load event [s.tl()]';
-          }
-
-          switch (clickAction) {
-            case 'action':
-              s.tl(true,linkType,linkName,null,null);
-              break;
-            
-            case 'link':
-              s.tl(this,linkType,linkName,null,null);
-              break;
-          }
+        if (typeof linkName === 'undefined') {
+          linkName = 'Non page load event [s.tl()]';
         }
+
+        switch (clickAction) {
+          case 'action':
+            s.tl(true,linkType,linkName,null,null);
+            break;
+          
+          case 'link':
+            s.tl(this,linkType,linkName,null,null);
+            break;
+        }
+      }
 
 /****************************************************
 * Clear down properties we've just set
 **/
-        linkTrackVars = null;
-        trackingType  = null;
-        linkName      = null;
-        clickAction   = null;
-        linkType      = null;
+      linkTrackVars = null;
+      trackingType  = null;
+      linkName      = null;
+      clickAction   = null;
+      linkType      = null;
 
-        cleanValues(options);
+      cleanValues(options);
+      restoreInitialValues();
 
-        if (useInitialPropertyReset) restoreInitialValues();
+    } else {
 
-      } else {
+      console.error('Adobe Site Catalyst not present');
 
-        console.error('Adobe Site Catalyst not present');
-
-      }
     }
+  }
 
+  return {
+    taggingDefaults: null,
+    push:            push,
   };
+
 })();

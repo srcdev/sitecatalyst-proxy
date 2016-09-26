@@ -72,7 +72,7 @@ var SiteCatalyst = (function () {
 
     push:function(array){
 
-      if (s) {
+      if ( typeof s === 'undefined' ) {
 
         var useInitialPropertyReset = true,
             linkTrackVars = [],

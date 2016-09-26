@@ -9,7 +9,7 @@ Assumes `s_code` has already been loaded and initialised on the page. This will 
 - [Setup](#setup)
 - [Usage](#usage)
 - [Options](#options)
-- [Links](#links)
+- [Link type definitions](#link-type-definitions)
 - [Simulate page load tracking](#simulate-page-load-tracking)
 - [Track a click event](#track-a-click-event)
 - [Track a navigation click](#track-a-navigation-click)
@@ -51,31 +51,31 @@ SiteCatalyst.push({
 
 `SiteCatalyst.push` requires an object to be passed with attributes defining the type of event. The following options are available.
 
-| Parameter   | Options                   | Required |
-|-------------|---------------------------|----------|
-| type        | 'load', 'event'           |     -    |
-| clickAction | 'action', 'link'          |     -    |
-| linkType    | 'o', 'e', 'd'             |     -    |
-| linkName    | 'Download PDF'            |     -    |
-| pageName    | 'Page name value'         |     -    |
-| campaign    | 'Your campaign ID'        |     -    |
-| channel     | 'Channel Goes Here'       |     -    |
-| eVar        | 'eVar Value (e.g. eVar3)' |     -    |
-| events      | 'event2 to event3'        |     -    |
-| hier        | 'Hier string'             |     -    |
-| prop        | 'prop value (e.g. prop2)' |     -    |
-| products    | 'Product values go here'  |     -    |
-| server      | 'UK Site'                 |     -    |
+| Parameter     | Options                   | Required |
+|---------------|---------------------------|----------|
+| `type`        | 'load', 'event'           |     -    |
+| `clickAction` | 'action', 'link'          |     -    |
+| `linkType`    | 'o', 'e', 'd'             |     -    |
+| `linkName`    | 'Download PDF'            |     -    |
+| `pageName`    | 'Page name value'         |     -    |
+| `campaign`    | 'Your campaign ID'        |     -    |
+| `channel`     | 'Channel Goes Here'       |     -    |
+| `eVar`        | 'eVar Value (e.g. eVar3)' |     -    |
+| `events`      | 'event2 to event3'        |     -    |
+| `hier`        | 'Hier string'             |     -    |
+| `prop`        | 'prop value (e.g. prop2)' |     -    |
+| `products`    | 'Product values go here'  |     -    |
+| `server`      | 'UK Site'                 |     -    |
 
-### Links
+### Link type definitions
 
-There are different link types (`linkType`).
+There are three different link types (`linkType`):
 
-| Option | Description |
-|--------|-------------|
-| o      | other       |
-| e      | exit link   |
-| e      | download    |
+| Option   | Description |
+|----------|-------------|
+| `o`      | Other       |
+| `e`      | Exit link   |
+| `d`      | Download    |
 
 ## Simulate page load tracking `s.t()`
 

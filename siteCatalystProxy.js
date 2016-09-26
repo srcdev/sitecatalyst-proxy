@@ -2,7 +2,7 @@
 * Interface to pass data through to s_code for reporting
 **/
 
-var SiteCatalyst = (function () {  
+var SiteCatalyst = (function (s) {  
 
 /****************************************************
 * Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
@@ -37,7 +37,9 @@ var SiteCatalyst = (function () {
     if (taggingDefaults === null) return;
 
     var property;
+
     for (property in s) {
+
       if (!s.hasOwnProperty(property)) continue;
 
       if (typeof s[property] !== 'object' && typeof s[property] !== 'function') {
@@ -55,22 +57,23 @@ var SiteCatalyst = (function () {
 /****************************************************
 * Clear down properties created for s.tl()
 **/
-  function cleanValues(array){
+  function cleanValues(options){
     var property;
-    var index;
+    var i;
 
-    for (index in array) {
-      if (array.hasOwnProperty(index)) {
-        property = index;
+    for (i in options) {
+      if (options.hasOwnProperty(i)) {
+        property = i;
         delete s[property];
       }
     }
   };
 
   return {
+
     taggingDefaults: null,
 
-    push:function(array){
+    push: function(options) {
 
       if ( typeof s === 'undefined' ) {
 
@@ -82,14 +85,16 @@ var SiteCatalyst = (function () {
             clickAction,
             linkType,
             property,
-            index;
+            i;
 
         if (useInitialPropertyReset) saveInitialValues(); 
 
-        for (index in array) {
-          if (array.hasOwnProperty(index)) {
-            property = index;
-            var value = array[index];
+        for (i in options) {
+
+          if (options.hasOwnProperty(i)) {
+
+            property = i;
+            var value = options[i];
 
             switch (property) {
 
@@ -122,7 +127,7 @@ var SiteCatalyst = (function () {
 * Create the s_code call and send analytics
 **/
         s.linkTrackEvents = s.events;
-        s.linkTrackVars = linkTrackVars.join(',');
+        s.linkTrackVars   = linkTrackVars.join(',');
 
         if (trackingType === 'load') {
 
@@ -149,18 +154,21 @@ var SiteCatalyst = (function () {
 * Clear down properties we've just set
 **/
         linkTrackVars = null;
-        trackingType = null;
-        linkName = null;
-        clickAction = null;
-        linkType = null;
-        cleanValues(array);
+        trackingType  = null;
+        linkName      = null;
+        clickAction   = null;
+        linkType      = null;
+
+        cleanValues(options);
 
         if (useInitialPropertyReset) restoreInitialValues();
 
       } else {
+
         console.error('Adobe Site Catalyst not present');
+
       }
     }
 
   };
-})();
+})(s);

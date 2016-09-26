@@ -37,11 +37,11 @@ var SiteCatalyst = (function() {
 **/
   function restoreInitialValues() {
 
+    var taggingDefaults = SiteCatalyst.taggingDefaults;
+
     if (taggingDefaults === null) {
       return;
     }
-
-    var taggingDefaults = SiteCatalyst.taggingDefaults;
 
     for (var property in s) {
 

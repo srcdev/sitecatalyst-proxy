@@ -12,17 +12,22 @@ var SiteCatalyst = (function() {
     if (SiteCatalyst.taggingDefaults === null) {
 
       var taggingDefaults;
-      var property;
       
       SiteCatalyst.taggingDefaults = taggingDefaults = {};      
 
-      for (property in s) {
+      for (var property in s) {
 
-        if (!s.hasOwnProperty(property)) continue;
-        if (typeof s[property] !== 'undefined' && typeof s[property] !== 'object' && typeof s[property] !== 'function') {
-          taggingDefaults[property] = s[property];
+        if (!s.hasOwnProperty(property)) {
+          continue;
         }
 
+        if (typeof s[property] !== 'undefined' &&
+            typeof s[property] !== 'object' &&
+            typeof s[property] !== 'function') {
+
+          taggingDefaults[property] = s[property];
+
+        }
       }
     }
   };
@@ -37,13 +42,15 @@ var SiteCatalyst = (function() {
     }
 
     var taggingDefaults = SiteCatalyst.taggingDefaults;
-    var property;
 
-    for (property in s) {
+    for (var property in s) {
 
-      if (!s.hasOwnProperty(property)) continue;
+      if (!s.hasOwnProperty(property)) {
+        continue;
+      }
 
-      if (typeof s[property] !== 'object' && typeof s[property] !== 'function') {
+      if (typeof s[property] !== 'object' &&
+          typeof s[property] !== 'function') {
 
         if (typeof taggingDefaults[property] !== 'undefined') {
           s[property] = taggingDefaults[property];
@@ -60,9 +67,8 @@ var SiteCatalyst = (function() {
 **/
   function cleanValues(options) {
     var property;
-    var i;
 
-    for (i in options) {
+    for (var i in options) {
       if (options.hasOwnProperty(i)) {
         property = i;
         delete s[property];
@@ -80,12 +86,11 @@ var SiteCatalyst = (function() {
           linkName,
           clickAction,
           linkType,
-          property,
-          i;
+          property;
 
-      this.saveInitialValues();
+      saveInitialValues();
 
-      for (i in options) {
+      for (var i in options) {
 
         if (options.hasOwnProperty(i)) {
 
@@ -155,8 +160,8 @@ var SiteCatalyst = (function() {
       clickAction   = null;
       linkType      = null;
 
-      this.cleanValues(options);
-      this.restoreInitialValues();
+      cleanValues(options);
+      restoreInitialValues();
 
     } else {
 
@@ -166,11 +171,8 @@ var SiteCatalyst = (function() {
   }
 
   return {
-    taggingDefaults:      null,
-    push:                 push,
-    cleanValues:          cleanValues,
-    saveInitialValues:    saveInitialValues,
-    restoreInitialValues: restoreInitialValues,
+    taggingDefaults: null,
+    push:            push,
   };
 
 })();

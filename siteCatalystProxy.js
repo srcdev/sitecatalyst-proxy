@@ -158,7 +158,7 @@ var SiteCatalyst = (function () {
         if (useInitialPropertyReset) restoreInitialValues();
 
       } else {
-        console.log('Adobe Site Catalyst not present');
+        console.error('Adobe Site Catalyst not present');
       }
     }
 

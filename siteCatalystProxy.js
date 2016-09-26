@@ -2,7 +2,7 @@
 * Interface to pass data through to s_code for reporting
 **/
 
-var SiteCatalyst = (function (s) {  
+var SiteCatalyst = (function () {  
 
 /****************************************************
 * Sitecatalyst will return unexpected values with s.t() so we save them to an object for later re-use
@@ -171,4 +171,4 @@ var SiteCatalyst = (function (s) {
     }
 
   };
-})(s);
+})();

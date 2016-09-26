@@ -9,7 +9,7 @@ Assumes `s_code` has already been loaded and initialised on the page. This will 
 - [Setup](#setup)
 - [Usage](#usage)
 - [Options](#options)
-- [Link](#link)
+- [Links](#links)
 - [Simulate page load tracking](#simulate-page-load-tracking)
 - [Track a click event](#track-a-click-event)
 - [Track a navigation click](#track-a-navigation-click)
@@ -69,7 +69,7 @@ SiteCatalyst.push({
 
 ### Links
 
-There are different types of links (`linkType`).
+There are different link types (`linkType`).
 
 | Option | Description |
 |--------|-------------|

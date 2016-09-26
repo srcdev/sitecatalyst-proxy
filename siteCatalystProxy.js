@@ -75,7 +75,7 @@ var SiteCatalyst = (function (s) {
 
     push: function(options) {
 
-      if ( typeof s === 'undefined' ) {
+      if ( typeof s !== 'undefined' ) {
 
         var useInitialPropertyReset = true,
             linkTrackVars = [],
